@@ -28,10 +28,12 @@ function Header() {
 
       {/* Header navigation: user icon, shop icon, and etc */}
       <div className="header_nav">
-        <div className="header_option">
-          <span className="header_option_lineOne">Hello Guest</span>
-          <span className="header_option_lineTwo">Sign In</span>
-        </div>
+        <Link to="/login">
+          <div className="header_option">
+            <span className="header_option_lineOne">Hello Guest</span>
+            <span className="header_option_lineTwo">Sign In</span>
+          </div>
+        </Link>
         <div className="header_option">
           <span className="header_option_lineOne">Returns</span>
           <span className="header_option_lineTwo">& Order</span>
