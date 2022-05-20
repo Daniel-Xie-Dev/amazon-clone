@@ -3,13 +3,16 @@
   padding: 20px;
   background-color: white;
   height: max-content;
-  justify-content: space-evenly;
 }
 
 .checkout_ad {
   width: 100%;
   margin-bottom: 15px;
   max-height: 200px;
+}
+
+.checkout_left {
+  width: 400px;
 }
 
 .checkout_title {
