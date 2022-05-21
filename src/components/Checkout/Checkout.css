@@ -3,6 +3,7 @@
   padding: 20px;
   background-color: white;
   height: max-content;
+  justify-content: space-between;
 }
 
 .checkout_ad {
@@ -12,7 +13,7 @@
 }
 
 .checkout_left {
-  width: 400px;
+  width: 100%;
 }
 
 .checkout_title {
