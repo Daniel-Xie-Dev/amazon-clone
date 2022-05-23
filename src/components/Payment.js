@@ -1,10 +1,61 @@
 import "./Payment.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "../StateProvider";
 import CheckoutProduct from "./Checkout/CheckoutProduct";
+import {
+  useStripe,
+  useElements,
+  CardElement,
+  Elements,
+} from "@stripe/react-stripe-js";
+import CurrencyFormat from "react-currency-format";
+import { getBasketTotal } from "../reducer";
+import instance from "../axios";
+import { useNavigate } from "react-router-dom";
 
 function Payment() {
-  const [{ basket }, dispatch] = useStateValue();
+  let navigate = useNavigate();
+
+  const [{ basket, user }, dispatch] = useStateValue();
+  const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState(null);
+  const [clientSecret, setClientSecret] = useState(true);
+
+  const stripe = useStripe();
+  const element = useElements();
+
+  useEffect(() => {
+    const getClientSecret = async () => {
+      const response = await instance({
+        method: "post",
+        url: `/`,
+      });
+      console.log(response.data);
+      setClientSecret(response.data.clientSecret);
+    };
+    getClientSecret();
+  }, [basket]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setDisabled(true);
+
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: element.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
+        setDisabled(true);
+        navigate("/");
+      });
+  };
+
+  const handleChange = (e) => {
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : "");
+  };
 
   return (
     <div className="payment">
@@ -12,12 +63,10 @@ function Payment() {
       <div className="payment_container">
         <div>
           <p className="payment_text">Delivery Address</p>
-          <div>
-            <ul className="payment_address">
-              <li>email</li>
-              <li>Amazon-Clone React St</li>
-              <li>New York, NY</li>
-            </ul>
+          <div className="payment_address">
+            <p>{user?.email}</p>
+            <p>Amazon-Clone St </p>
+            <p>New York, NY</p>
           </div>
         </div>
 
@@ -41,6 +90,34 @@ function Payment() {
 
         <div>
           <p className="payment_text">Payment Method</p>
+          <div className="payment_details">
+            <form onSubmit={handleSubmit}>
+              <CardElement onChange={handleChange} />
+              <div className="payment_priceContainer">
+                <CurrencyFormat
+                  renderText={(value) => (
+                    <>
+                      <p>
+                        Subtotal ({basket?.length} items):{" "}
+                        <strong>{value}</strong>
+                      </p>
+                      <small className="subtotal_gift">
+                        <input type="checkbox" /> This order contains a gift
+                      </small>
+                    </>
+                  )}
+                  decimalScale={2}
+                  value={getBasketTotal(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                <button disabled={disabled}>
+                  <span>Buy Now</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
