@@ -1,0 +1,7 @@
+.order_container {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  min-width: 500px;
+}

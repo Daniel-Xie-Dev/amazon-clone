@@ -16,11 +16,14 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-react": "^11.0.1",
     "express": "^4.18.1",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.18.0",
     "stripe": "^9.2.0"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",

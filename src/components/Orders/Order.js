@@ -29,8 +29,8 @@ function Order() {
   return (
     <div className="order">
       <div className="order_container">
-        {orders?.map((order) => {
-          return <OrderCard order={order} />;
+        {orders?.map((order, index) => {
+          return <OrderCard key={index} order={order} />;
         })}
       </div>
     </div>

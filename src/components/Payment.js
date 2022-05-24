@@ -25,43 +25,37 @@ function Payment() {
   const stripe = useStripe();
   const element = useElements();
 
-  useEffect(() => {
-    const getClientSecret = async () => {
-      const response = await instance({
-        method: "post",
-        url: `/payments/create?total=${getBasketTotal(basket)}`,
-      });
-      console.log(response);
-      setClientSecret(response.data);
-    };
-    getClientSecret();
-  }, [basket]);
+  // useEffect(() => {
+  //   const getClientSecret = async () => {
+  //     const response = await instance({
+  //       method: "post",
+  //       url: `/payments/create?total=${getBasketTotal(basket)}`,
+  //     });
+
+  //     setClientSecret(response.data);
+  //   };
+  //   getClientSecret();
+  // }, [basket]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisabled(true);
-    const payload = await stripe
-      .confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: element.getElement(CardElement),
-        },
-      })
-      .then(({ paymentIntent }) => {
-        console.log(paymentIntent);
-        db.collection("users")
-          .doc(user?.uid)
-          .collection("orders")
-          .doc(paymentIntent.id)
-          .set({
-            basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created,
-          });
-        dispatch({
-          type: "EMPTY_BASKET",
-        });
-        navigate("/order");
-      });
+
+    db.collection("users").doc(user?.uid).collection("orders").add({
+      created: Date.now(),
+      basket: basket,
+    });
+    dispatch({
+      type: "EMPTY_BASKET",
+    });
+    navigate("/order");
+    // const payload = await stripe
+    //   .confirmCardPayment(clientSecret, {
+    //     payment_method: {
+    //       card: element.getElement(CardElement),
+    //     },
+    //   })
+    //   .then(({ paymentIntent }) => {});
   };
 
   const handleChange = (e) => {

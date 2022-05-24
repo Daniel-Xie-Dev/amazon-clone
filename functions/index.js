@@ -1,8 +1,9 @@
+/* eslint-disable object-curly-spacing */
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+const stripe = require("stripe")();
 
 // API
 
@@ -22,7 +23,7 @@ app.get("/", (request, response) => {
 app.post("/payments/create", async (request, response) => {
   const total = request.query;
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 2000,
+    amount: total,
     currency: "usd",
     payment_method_types: ["card"],
   });
