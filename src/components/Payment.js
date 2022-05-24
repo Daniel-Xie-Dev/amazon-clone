@@ -1,6 +1,7 @@
 import "./Payment.css";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "../StateProvider";
+import { db } from "../firebase";
 import CheckoutProduct from "./Checkout/CheckoutProduct";
 import {
   useStripe,
@@ -28,10 +29,10 @@ function Payment() {
     const getClientSecret = async () => {
       const response = await instance({
         method: "post",
-        url: `/`,
+        url: `/payments/create?total=${getBasketTotal(basket)}`,
       });
-      console.log(response.data);
-      setClientSecret(response.data.clientSecret);
+      console.log(response);
+      setClientSecret(response.data);
     };
     getClientSecret();
   }, [basket]);
@@ -39,7 +40,6 @@ function Payment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setDisabled(true);
-
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -47,8 +47,20 @@ function Payment() {
         },
       })
       .then(({ paymentIntent }) => {
-        setDisabled(true);
-        navigate("/");
+        console.log(paymentIntent);
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+        navigate("/order");
       });
   };
 
@@ -112,7 +124,7 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button disabled={disabled}>
+                <button type="submission" disabled={disabled}>
                   <span>Buy Now</span>
                 </button>
               </div>

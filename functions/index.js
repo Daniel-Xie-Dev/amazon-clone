@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 // API
@@ -11,32 +12,28 @@ const app = express();
 // -Middlewares
 app.use(cors({ origin: true }));
 app.use(express.json());
+app.options("*", cors());
 
 // -API routes
-app.post("/", (request, response) => {
+app.get("/", (request, response) => {
   response.status(200).send("HELLO WORLD");
 });
 
-app.post("/payments", async (request, response) => {
-  console.log(123123);
-  response.status(200).send("1");
-  //   const total = 0;
-  //   console.log("Payment Request Received", total);
-
-  //   const paymentIntent = await stripe.paymentIntents.create({
-  //     amount: total,
-  //     currency: "usd",
-  //   });
-  //   response.status(201).send({
-  //     clientSecret: paymentIntent.client_secret,
-  //   });
+app.post("/payments/create", async (request, response) => {
+  const total = request.query;
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: 2000,
+    currency: "usd",
+    payment_method_types: ["card"],
+  });
+  response.status(201).send(paymentIntent.client_secret);
 });
 
 // app.post("/payments/create", async (request, response) => {
 //   const total = request.query.total;
 //   console.log("Payment Request Received", total);
 
-//   const paymentIntent = await stripe.paymentIntents.create({
+//   const paymentIntent = await stripe.PaymentIntents.create({
 //     amount: total,
 //     currency: "usd",
 //   });
