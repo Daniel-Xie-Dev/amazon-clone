@@ -28,3 +28,5 @@ yarn-error.log*
 functions/.env
 functions/ui-debug.log
 src/firebase.js
+.firebase/hosting.YnVpbGQ.cache
+functions/ui-debug.log
