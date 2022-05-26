@@ -3,7 +3,6 @@ import React from "react";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 
 function OrderCard({ order }) {
-  console.log(order);
   const getDate = () => {
     const date = new Date(order.data.created);
     return date.toLocaleString();

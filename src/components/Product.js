@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { useStateValue } from "../StateProvider";
 import "./Product.css";
 
-function Product({ id, title, image, price, rating }) {
+function Product({ id, type, brand, title, image, price, rating }) {
+  const navigate = useNavigate();
   const [{ basket }, dispatch] = useStateValue();
 
   const addToBasket = () => {
@@ -19,9 +21,14 @@ function Product({ id, title, image, price, rating }) {
   };
 
   return (
-    <div className="product">
+    <div
+      // onClick={() => {
+      //   navigate(`/details/${type}/${brand}/${id}`);
+      // }}
+      className="product"
+    >
       <div className="product_info">
-        <p>{title}</p>
+        <p className="product_title">{title}</p>
         <p className="product_price">
           <small>$</small>
           <strong>{price}</strong>

@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Product from "./Product";
+import { db } from "../firebase";
 
 function Home() {
+  const [product, setProduct] = useState([]);
+  const [shuffled, setShuffled] = useState([]);
+
+  const shuffle = () => {
+    let temp = [];
+    for (let array = [0, 1, 2, 3, 4, 5], i = array.length; i--; ) {
+      var random = array.splice(Math.floor(Math.random() * (i + 1)), 1)[0];
+      temp.push(random);
+    }
+    setShuffled(temp);
+  };
+
+  useEffect(() => {
+    shuffle();
+    const getProducts = () => {
+      db.collection("products")
+        .doc("Electronics")
+        .collection("samsung")
+        .onSnapshot((snapshot) => {
+          setProduct(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          );
+        });
+    };
+    getProducts();
+  }, []);
+
   return (
     <div className="home">
       <div className="home_container">
@@ -14,55 +45,67 @@ function Home() {
 
         <div className="home_row">
           <Product
-            id="1"
-            title="SAMSUNG Galaxy S22+ Smartphone, Factory Unlocked Android Cell Phone, 256GB, 8K Camera & Video, Brightest Display, Long Battery Life, Fast 4nm Processor, US Version, Phantom Black"
-            price={799.99}
-            image="https://m.media-amazon.com/images/I/61V49wCBDtL._AC_SX466_.jpg"
-            rating={5}
+            id={product[shuffled[0]]?.id}
+            type={product[shuffled[0]]?.data.type}
+            brand={product[shuffled[0]]?.data.brand}
+            title={product[shuffled[0]]?.data.title}
+            price={product[shuffled[0]]?.data.price}
+            image={product[shuffled[0]]?.data.image}
+            rating={product[shuffled[0]]?.data.rating}
           />
 
           <Product
-            id="2"
-            title="SAMSUNG Galaxy Buds Live True Wireless Earbuds US Version Active Noise Cancelling Wireless Charging Case Included, Mystic Black"
-            price={94.99}
-            image="https://m.media-amazon.com/images/I/71LcAql4+aL._AC_SL1500_.jpg"
-            rating={4}
-          />
-        </div>
-
-        <div className="home_row">
-          <Product
-            id="3"
-            title="EVGA GeForce RTX 2060 12GB XC Gaming, 12G-P4-2263-KR, 12GB GDDR6,Dual Fans, Metal Backplate"
-            price={406.99}
-            image="https://m.media-amazon.com/images/I/71psWySiMAL._AC_SL1500_.jpg"
-            rating={4}
-          />
-
-          <Product
-            id="4"
-            title="PowerColor Hellhound AMD Radeon RX 6600 Graphics Card with 8GB GDDR6 Memory"
-            price={359.99}
-            image="https://m.media-amazon.com/images/I/81gACcPPEyL._AC_SL1500_.jpg"
-            rating={4}
-          />
-
-          <Product
-            id="5"
-            title="Alienware M15 R6, 15.6 inch QHD 240Hz Gaming Laptop - Intel Core i7-11800H, 16GB DDR4 RAM, 512GB SSD, NVIDIA GeForce RTX 3070 8GB GDDR6"
-            price={1699.99}
-            image="https://m.media-amazon.com/images/I/71PSUjIQKDS._AC_SL1500_.jpg"
-            rating={5}
+            id={product[shuffled[1]]?.id}
+            type={product[shuffled[1]]?.data.type}
+            brand={product[shuffled[1]]?.data.brand}
+            title={product[shuffled[1]]?.data.title}
+            price={product[shuffled[1]]?.data.price}
+            image={product[shuffled[1]]?.data.image}
+            rating={product[shuffled[1]]?.data.rating}
           />
         </div>
 
         <div className="home_row">
           <Product
-            id="6"
-            title="HP Pavilion 27 Touch Desktop 1TB SSD Extreme (Intel Core i7-11700 Processor Turbo Boost to 4.50GHz, 16 GB RAM, 1 TB SSD, 27-inch FullHD Touchscreen, Win 11) PC Computer All-in-One"
-            price={2299.99}
-            image="https://m.media-amazon.com/images/I/610AAiDk5yL._AC_SL1392_.jpg"
-            rating={5}
+            id={product[shuffled[2]]?.id}
+            type={product[shuffled[2]]?.data.type}
+            brand={product[shuffled[2]]?.data.brand}
+            title={product[shuffled[2]]?.data.title}
+            price={product[shuffled[2]]?.data.price}
+            image={product[shuffled[2]]?.data.image}
+            rating={product[shuffled[2]]?.data.rating}
+          />
+
+          <Product
+            id={product[shuffled[3]]?.id}
+            type={product[shuffled[3]]?.data.type}
+            brand={product[shuffled[3]]?.data.brand}
+            title={product[shuffled[3]]?.data.title}
+            price={product[shuffled[3]]?.data.price}
+            image={product[shuffled[3]]?.data.image}
+            rating={product[shuffled[3]]?.data.rating}
+          />
+
+          <Product
+            id={product[shuffled[4]]?.id}
+            type={product[shuffled[4]]?.data.type}
+            brand={product[shuffled[4]]?.data.brand}
+            title={product[shuffled[4]]?.data.title}
+            price={product[shuffled[4]]?.data.price}
+            image={product[shuffled[4]]?.data.image}
+            rating={product[shuffled[4]]?.data.rating}
+          />
+        </div>
+
+        <div className="home_row">
+          <Product
+            id={product[shuffled[5]]?.id}
+            type={product[shuffled[5]]?.data.type}
+            brand={product[shuffled[5]]?.data.brand}
+            title={product[shuffled[5]]?.data.title}
+            price={product[shuffled[5]]?.data.price}
+            image={product[shuffled[5]]?.data.image}
+            rating={product[shuffled[5]]?.data.rating}
           />
         </div>
       </div>
