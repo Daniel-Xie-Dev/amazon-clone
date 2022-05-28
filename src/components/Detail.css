@@ -13,8 +13,8 @@
 }
 
 .detail_container_image {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   object-fit: contain;
   flex: 0.55;
   margin-top: 5%;
@@ -29,7 +29,7 @@
 }
 
 .detail_container_title {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 500;
   margin-bottom: 15px;
 }
@@ -56,4 +56,17 @@
 .detail_container_section > div {
   flex: 0.7;
   font-size: 24px;
+}
+
+.detail_container_button {
+  padding-top: 6px;
+  justify-content: center;
+}
+
+.detail_container_button:hover {
+  cursor: pointer;
+}
+
+.grid_item {
+  text-align: center;
 }

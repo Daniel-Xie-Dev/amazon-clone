@@ -5,10 +5,11 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import RemoveCircleOutlineSharpIcon from "@mui/icons-material/RemoveCircleOutlineSharp";
+import { Grid } from "@mui/material";
 function Detail() {
   const { type, brand, doc_id } = useParams();
+  const [quantity, setQuantity] = useState(0);
   const [item, setItem] = useState();
-  console.log(type, brand, doc_id);
 
   useEffect(() => {
     const getItem = () => {
@@ -25,8 +26,12 @@ function Detail() {
         });
     };
     getItem();
-    console.log(item);
   }, []);
+
+  const handleIncDec = (bool) => {
+    bool ? setQuantity(quantity + 1) : setQuantity(quantity - 1);
+  };
+
   return (
     <div className="detail">
       <div className="detail_container">
@@ -54,9 +59,31 @@ function Detail() {
           <div className="detail_container_section">
             <h3>Quantity: </h3>
             <div>
-              <RemoveCircleOutlineSharpIcon className="detail_container_button" />
-              <AddCircleOutlineSharpIcon className="detail_container_button" />
+              <Grid container spacing={3}>
+                <Grid className="grid_item" item xs="auto">
+                  <RemoveCircleOutlineSharpIcon
+                    className="detail_container_button"
+                    sx={{ fontSize: 26 }}
+                    onClick={() => handleIncDec(false)}
+                  />
+                </Grid>
+                <Grid className="grid_item" item xs={4}>
+                  {quantity}
+                </Grid>
+                <Grid className="grid_item" item xs="auto">
+                  <AddCircleOutlineSharpIcon
+                    className="detail_container_button"
+                    color="primary"
+                    sx={{ fontSize: 26 }}
+                    onClick={() => handleIncDec(true)}
+                  />
+                </Grid>
+              </Grid>
             </div>
+          </div>
+
+          <div className="detail_container_section">
+            <h3>Colors: </h3>
           </div>
         </div>
       </div>

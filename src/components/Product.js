@@ -22,9 +22,9 @@ function Product({ id, type, brand, title, image, price, rating }) {
 
   return (
     <div
-      // onClick={() => {
-      //   navigate(`/details/${type}/${brand}/${id}`);
-      // }}
+      onClick={() => {
+        navigate(`/details/${type}/${brand}/${id}`);
+      }}
       className="product"
     >
       <div className="product_info">
