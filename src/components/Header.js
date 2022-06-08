@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,11 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
 
-const aquaticCreatures = [{ label: "Samsung", value: "Samsung" }];
+const brands = ["Samsung", "Apple", "Google"];
 
 function Header() {
   const navigate = useNavigate();
   const [{ basket, user }, dispatch] = useStateValue();
+  const [input, setInput] = useState("");
 
   const handleAuthentication = () => {
     if (user) {
@@ -29,6 +30,10 @@ function Header() {
     }
   };
 
+  const handleSearch = (event) => {
+    setInput(event.target.value);
+  };
+
   return (
     <div className="header">
       {/* Logo of header */}
@@ -42,8 +47,25 @@ function Header() {
 
       {/* Search section: textbox and search button */}
       <form className="header_search">
-        <Select className="header_searchInput" options={aquaticCreatures} />
-        <SearchIcon className="header_searchIcon" />
+        <input
+          className="header_searchInput"
+          list="hosting-plan"
+          type="text"
+          onChange={handleSearch}
+        />
+        <datalist id="hosting-plan">
+          {brands.map((brand) => {
+            return <option value={brand} />;
+          })}
+        </datalist>
+        <SearchIcon
+          className="header_searchIcon"
+          onClick={() => {
+            if (input.length !== 0) {
+              navigate(`/search/${input}`);
+            }
+          }}
+        />
       </form>
 
       {/* Header navigation: user icon, shop icon, and etc */}

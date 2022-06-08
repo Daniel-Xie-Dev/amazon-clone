@@ -1,6 +1,5 @@
 .product {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   margin: 10px;
@@ -23,6 +22,7 @@
   width: 100%;
   object-fit: contain;
   margin-bottom: 15px;
+  flex: 0.35;
 }
 
 .product_title:hover {
@@ -31,8 +31,9 @@
 
 .product_info {
   width: 100%;
-  height: 100px;
-  margin-bottom: 20px;
+  height: 100%;
+  margin-left: 20px;
+  flex: 0.65;
 }
 
 .product_price {

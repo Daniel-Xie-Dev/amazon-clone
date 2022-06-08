@@ -34,18 +34,24 @@
 .header_searchInput {
   padding: 10px;
   width: 100%;
+  height: 13px;
+  font-size: 20px;
   outline: none;
 }
 
 .header_searchInput:focus {
-  border: 2px solid #cd9042;
+  border: 1px solid #cd9042;
   border-radius: 2px;
 }
 
 .header_searchIcon {
   padding: 5px;
-  height: 24px !important;
+  height: 26px !important;
   background-color: #cd9042;
+}
+
+.header_searchIcon:hover {
+  cursor: pointer;
 }
 
 .header_nav {
