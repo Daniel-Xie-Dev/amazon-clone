@@ -8,16 +8,9 @@ import CheckoutProduct from "./CheckoutProduct";
 
 function Checkout() {
   const [{ basket, user }, dispatch] = useStateValue();
-
   return (
     <div className="checkout">
       <div className="checkout_left">
-        <img
-          className="checkout_ad"
-          alt=""
-          src="https://www.tecnoyouth.it/wp-content/uploads/2014/08/Amazon-banner.png"
-        />
-
         <div>
           <h3>Hello {user?.email}</h3>
           <h2 className="checkout_title">Your shopping basket:</h2>
@@ -29,7 +22,7 @@ function Checkout() {
                 image={element.image}
                 title={element.title}
                 price={element.price}
-                rating={element.rating}
+                quantity={element.quantity}
               />
             );
           })}

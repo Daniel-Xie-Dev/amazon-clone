@@ -1,12 +1,16 @@
 .detail {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
 .detail_container {
   display: flex;
   margin-top: 20px;
-  width: 70%;
-  height: 100vh;
+  width: 75%;
+  height: max-content;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
@@ -16,14 +20,18 @@
   width: 400px;
   height: 400px;
   object-fit: contain;
-  flex: 0.55;
+  flex: 0.35;
   margin-top: 5%;
+  margin-right: 5%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .detail_container_info {
   display: flex;
   flex-direction: column;
-  flex: 0.45;
+  flex: 0.65;
   margin-top: 5%;
   float: left;
 }
@@ -32,6 +40,8 @@
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid lightgray;
 }
 
 .detail_container_rating {
@@ -49,24 +59,70 @@
 }
 
 .detail_container_section > h3 {
-  flex: 0.3;
-  font-size: 18px;
+  flex: 0.2;
+  font-size: 28px;
 }
 
 .detail_container_section > div {
-  flex: 0.7;
+  flex: 0.3;
   font-size: 24px;
 }
 
 .detail_container_button {
-  padding-top: 6px;
-  justify-content: center;
+  margin-top: 4px;
+  border: 1px solid transparent;
 }
 
 .detail_container_button:hover {
   cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: lightgrey;
 }
 
 .grid_item {
   text-align: center;
+}
+
+.detail_button {
+  background-color: #f0c14b;
+  border-radius: 2px;
+  width: 50%;
+  height: 30px;
+  border: 1px solid;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-color: #a88734 #9c7e31 #846a29;
+  color: #111;
+}
+
+.detail_button:hover {
+  cursor: pointer;
+}
+
+.detail_container_description {
+  display: flex;
+  margin-top: 30px;
+}
+
+.detail_description h3 {
+  margin-left: 20px;
+}
+
+.detail_description {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+}
+
+.detail_separator {
+  margin-top: 20px;
+  border: 1px solid lightgray;
+  width: 80%;
+}
+
+.detail_listItem {
+  font-size: large;
+  font-weight: 500;
 }

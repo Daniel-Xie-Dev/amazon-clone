@@ -2,11 +2,14 @@ import React from "react";
 import "./Header.css";
 
 import SearchIcon from "@mui/icons-material/Search";
+import Select from "react-select";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
+
+const aquaticCreatures = [{ label: "Samsung", value: "Samsung" }];
 
 function Header() {
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ function Header() {
 
       {/* Search section: textbox and search button */}
       <form className="header_search">
-        <input className="header_searchInput" type="text" />
+        <Select className="header_searchInput" options={aquaticCreatures} />
         <SearchIcon className="header_searchIcon" />
       </form>
 

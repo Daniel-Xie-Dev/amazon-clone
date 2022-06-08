@@ -31,3 +31,6 @@ src/firebase.js
 .firebase/hosting.YnVpbGQ.cache
 functions/ui-debug.log
 .firebase/hosting.YnVpbGQ.cache
+.firebase/hosting.YnVpbGQ.cache
+*.log
+*.log

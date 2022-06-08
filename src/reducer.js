@@ -5,19 +5,24 @@ export const initialState = {
 
 // Selector
 export const getBasketTotal = (basket) =>
-  basket?.reduce((amount, item) => item.price + amount, 0);
+  basket?.reduce((amount, item) => item.price * item.quantity + amount, 0);
 
 const reducer = (state, action) => {
+  let index = state.basket.findIndex((item) => item.id === action.item.id);
+  let newBasket = [...state.basket];
   switch (action.type) {
     case "ADD_TO_BASKET":
+      if (index >= 0) {
+        newBasket[index].quantity += action.item.quantity;
+      } else {
+        newBasket.push(action.item);
+      }
+
       return {
         ...state,
-        basket: [...state.basket, action.item],
+        basket: newBasket,
       };
     case "REMOVE_FROM_BASKET":
-      const index = state.basket.findIndex((item) => item.id === action.id);
-
-      let newBasket = [...state.basket];
       if (index >= 0) {
         newBasket.splice(index, 1);
       } else {
@@ -26,6 +31,25 @@ const reducer = (state, action) => {
       return {
         ...state,
         basket: newBasket,
+      };
+
+    case "INC_DEC_FROM_BASKET":
+      let tempNewBasket = [...state.basket];
+      if (index >= 0) {
+        if (action.isInc) {
+          tempNewBasket[index].quantity += 1;
+        } else {
+          if (tempNewBasket[index].quantity - 1 === 0) {
+            tempNewBasket.splice(index, 1);
+          } else {
+            tempNewBasket[index].quantity -= 1;
+          }
+        }
+      }
+
+      return {
+        ...state,
+        basket: tempNewBasket,
       };
 
     case "EMPTY_BASKET":
