@@ -2,11 +2,13 @@ import "./Detail.css";
 
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import RemoveCircleOutlineSharpIcon from "@mui/icons-material/RemoveCircleOutlineSharp";
 import { Grid } from "@mui/material";
-import { useStateValue } from "../StateProvider";
+import { useStateValue } from "../../StateProvider";
+
+import Rating from "./Rating";
 
 const { FieldValue } = require("firebase/compat/firestore");
 
@@ -152,6 +154,9 @@ function Detail() {
               );
             })}
           </ul>
+        </div>
+        <div className="detail_rating">
+          <Rating rating={item?.rating} />
         </div>
       </div>
     </div>

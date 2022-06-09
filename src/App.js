@@ -11,7 +11,7 @@ import Payment from "./components/Payment";
 import Order from "./components/Orders/Order";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import Detail from "./components/Detail";
+import Detail from "./components/Detail/Detail";
 import SearchResult from "./components/SearchResult/SearchResult";
 
 const promise = loadStripe(

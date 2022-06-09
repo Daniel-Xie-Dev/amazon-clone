@@ -43,6 +43,7 @@ function SearchResult() {
         product.map((item, index) => {
           return (
             <Product
+              key={index}
               id={item.id}
               type={item.data.type}
               brand={item.data.brand}

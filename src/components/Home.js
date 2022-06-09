@@ -18,6 +18,7 @@ function Home() {
 
   useEffect(() => {
     shuffle();
+
     const getProducts = () => {
       db.collection("products")
         .doc("Electronics")
@@ -31,6 +32,7 @@ function Home() {
           );
         });
     };
+
     getProducts();
   }, []);
 
