@@ -5,19 +5,25 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import RemoveCircleOutlineSharpIcon from "@mui/icons-material/RemoveCircleOutlineSharp";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { Grid } from "@mui/material";
 import { useStateValue } from "../../StateProvider";
 
 import Rating from "./Rating";
-
-const { FieldValue } = require("firebase/compat/firestore");
+import Review from "./Review";
+import e from "express";
 
 function Detail() {
   const navigate = useNavigate();
   const [{ basket, user }, dispatch] = useStateValue();
+
   const { type, brand, doc_id } = useParams();
+
   const [quantity, setQuantity] = useState(1);
   const [item, setItem] = useState();
+  const [clickStar, setClickStar] = useState(0);
+  const [hoverStar, setHoverStar] = useState(0);
 
   const addToCart = (e) => {
     if (user) {
@@ -64,6 +70,10 @@ function Detail() {
     }
   };
 
+  const handleSubmit = (event) => {
+    console.log(event);
+  };
+
   return (
     <div className="detail">
       <div className="detail_container">
@@ -72,6 +82,20 @@ function Detail() {
           src={item?.image}
           alt="missing"
         />
+
+        <div className="detail_description">
+          <h3>About this item</h3>
+          <ul>
+            {item?.about.map((about, index) => {
+              return (
+                <li className="detail_listItem" key={index}>
+                  {about}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
         <div className="detail_container_info">
           <p className="detail_container_title">{item?.title}</p>
 
@@ -143,22 +167,51 @@ function Detail() {
       <div className="detail_separator"></div>
 
       <div className="detail_container_description">
-        <div className="detail_description">
-          <h3>About this item</h3>
-          <ul>
-            {item?.about.map((about, index) => {
-              return (
-                <li className="detail_listItem" key={index}>
-                  {about}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
         <div className="detail_rating">
           <Rating rating={item?.rating} />
         </div>
+
+        <div className="detail_review">
+          <Review rating={item?.rating} />
+        </div>
+
+        <div className="detail_customer_review">
+          <form onSubmit={handleSubmit}>
+            {[...Array(5)].map((star, index) => {
+              return (
+                <button
+                  key={index}
+                  className="detail_starButton"
+                  onClick={() => setClickStar(index)}
+                  onMouseEnter={() => setHoverStar(index)}
+                  onMouseLeave={() => setHoverStar(clickStar)}
+                >
+                  {index <= hoverStar ? (
+                    <StarIcon className="detail_star" sx={{ fontSize: 36 }} />
+                  ) : (
+                    <StarBorderIcon
+                      className="detail_star"
+                      sx={{ fontSize: 36 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+            <textarea
+              className="detail_customerText"
+              maxLength={350}
+              rows={5}
+              cols={30}
+            ></textarea>
+
+            <button className="detail_review_submit" type="submit">
+              Review
+            </button>
+          </form>
+        </div>
       </div>
+
+      <div className="detail_separator"></div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ function Rating({ rating }) {
   const barWidth = useRef(null);
   const [width, setWidth] = useState(0);
   const [barArray, setBarArray] = useState([]);
+
   const getBarSize = () => {
     const newWidth = barWidth.current.clientWidth;
     setWidth(newWidth);
@@ -41,7 +42,7 @@ function Rating({ rating }) {
     });
 
     setBarArray(temp);
-  }, [rating, width]);
+  }, [rating]);
 
   return (
     <div className="rating">

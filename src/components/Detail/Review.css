@@ -1,0 +1,12 @@
+.review_container {
+  margin-bottom: 15px;
+}
+
+.review_user {
+  display: flex;
+  align-items: center;
+}
+
+.review_user > h3 {
+  margin-left: 10px;
+}
