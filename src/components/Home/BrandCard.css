@@ -1,0 +1,11 @@
+.brandCard {
+  width: 100%;
+  text-align: center;
+  background-color: blue;
+  border: 1px solid black;
+}
+
+.brandCard_image {
+  width: 200px;
+  object-fit: fill;
+}

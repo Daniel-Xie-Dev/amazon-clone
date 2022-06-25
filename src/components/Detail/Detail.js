@@ -12,7 +12,6 @@ import { useStateValue } from "../../StateProvider";
 
 import Rating from "./Rating";
 import Review from "./Review";
-import e from "express";
 
 function Detail() {
   const navigate = useNavigate();
@@ -22,8 +21,9 @@ function Detail() {
 
   const [quantity, setQuantity] = useState(1);
   const [item, setItem] = useState();
-  const [clickStar, setClickStar] = useState(0);
-  const [hoverStar, setHoverStar] = useState(0);
+  const [clickStar, setClickStar] = useState(1);
+  const [hoverStar, setHoverStar] = useState(1);
+  const [comment, setComment] = useState("");
 
   const addToCart = (e) => {
     if (user) {
@@ -70,8 +70,50 @@ function Detail() {
     }
   };
 
-  const handleSubmit = (event) => {
-    console.log(event);
+  const handleSubmit = async () => {
+    if (user) {
+      let index = -1;
+
+      for (let object of item.rating) {
+        if (object.user === user.uid) {
+          index = item.rating.indexOf(object);
+          break;
+        }
+      }
+
+      let copyRating = [...item.rating];
+      if (index !== -1) {
+        copyRating[index] = {
+          user: user.uid,
+          star: clickStar,
+          review: comment,
+        };
+      }
+
+      let rating =
+        index === -1
+          ? [
+              ...item.rating,
+              {
+                user: user.uid,
+                star: clickStar,
+                review: comment,
+              },
+            ]
+          : copyRating;
+
+      await db
+        .collection("products")
+        .doc(type)
+        .collection(brand)
+        .doc(doc_id)
+        .update({
+          rating: rating,
+        })
+        .then(navigate("/"));
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -176,38 +218,38 @@ function Detail() {
         </div>
 
         <div className="detail_customer_review">
-          <form onSubmit={handleSubmit}>
-            {[...Array(5)].map((star, index) => {
-              return (
-                <button
-                  key={index}
-                  className="detail_starButton"
-                  onClick={() => setClickStar(index)}
-                  onMouseEnter={() => setHoverStar(index)}
-                  onMouseLeave={() => setHoverStar(clickStar)}
-                >
-                  {index <= hoverStar ? (
-                    <StarIcon className="detail_star" sx={{ fontSize: 36 }} />
-                  ) : (
-                    <StarBorderIcon
-                      className="detail_star"
-                      sx={{ fontSize: 36 }}
-                    />
-                  )}
-                </button>
-              );
-            })}
-            <textarea
-              className="detail_customerText"
-              maxLength={350}
-              rows={5}
-              cols={30}
-            ></textarea>
+          {[...Array(5)].map((star, index) => {
+            return (
+              <button
+                key={index}
+                className="detail_starButton"
+                onClick={() => setClickStar(index + 1)}
+                onMouseEnter={() => setHoverStar(index + 1)}
+                onMouseLeave={() => setHoverStar(clickStar)}
+              >
+                {index < hoverStar ? (
+                  <StarIcon className="detail_star" sx={{ fontSize: 36 }} />
+                ) : (
+                  <StarBorderIcon
+                    className="detail_star"
+                    sx={{ fontSize: 36 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+          <textarea
+            className="detail_customerText"
+            name="userForm"
+            onChange={(event) => setComment(event.target.value)}
+            maxLength={350}
+            rows={5}
+            cols={30}
+          ></textarea>
 
-            <button className="detail_review_submit" type="submit">
-              Review
-            </button>
-          </form>
+          <button className="detail_review_submit" onClick={handleSubmit}>
+            Review
+          </button>
         </div>
       </div>
 

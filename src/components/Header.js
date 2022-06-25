@@ -54,8 +54,8 @@ function Header() {
           onChange={handleSearch}
         />
         <datalist id="hosting-plan">
-          {brands.map((brand) => {
-            return <option value={brand} />;
+          {brands.map((brand, index) => {
+            return <option key={index} value={brand} />;
           })}
         </datalist>
         <SearchIcon

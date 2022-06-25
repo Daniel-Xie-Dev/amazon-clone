@@ -121,7 +121,7 @@
 }
 
 .detail_rating {
-  width: 100%;
+  flex: 0.3;
 }
 
 .detail_separator {
@@ -137,11 +137,11 @@
 }
 
 .detail_review {
-  width: 100%;
+  flex: 0.4;
 }
 
 .detail_customer_review {
-  width: 100%;
+  flex: 0.3;
   text-align: ce;
 }
 

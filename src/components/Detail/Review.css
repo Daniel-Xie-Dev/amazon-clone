@@ -1,5 +1,12 @@
 .review_container {
   margin-bottom: 15px;
+  margin-right: 15px;
+  padding: 20px;
+}
+
+.review_container > p {
+  padding-right: 30px;
+  text-align: justify;
 }
 
 .review_user {
@@ -9,4 +16,18 @@
 
 .review_user > h3 {
   margin-left: 10px;
+}
+
+.personal_review_container {
+  margin-bottom: 15px;
+  margin-right: 15px;
+  background-color: #ff9900;
+  padding: 20px;
+}
+
+.personal_review_container > p {
+  padding-right: 30px;
+  text-align: justify;
+  font-size: 16px;
+  font-weight: 600;
 }

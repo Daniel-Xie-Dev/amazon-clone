@@ -1,36 +1,58 @@
 import "./Review.css";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useStateValue } from "../../StateProvider";
 
 function Review({ rating }) {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
+  const [order, setOrder] = useState([]);
 
-  console.log(rating);
+  useEffect(() => {
+    const changeOrder = () => {
+      if (rating && user) {
+        for (let i = 0; i < rating.length; i++) {
+          if (rating[i].user === user.uid) {
+            let object = rating.splice(i, 1);
+            rating.unshift(object[0]);
+            setOrder(rating);
+            break;
+          }
+        }
+      } else {
+        setOrder(rating);
+      }
+    };
+    changeOrder();
+  }, [rating]);
+
   return (
     <div className="review">
       <h2>Customer Comments</h2>
-      {rating?.map((item, index) => {
+      {order?.map((item, index) => {
         return (
-          <div className="review_container">
+          <div
+            key={item?.user}
+            className={
+              index === 0 ? "personal_review_container" : "review_container"
+            }
+          >
+            {index === 0 ? <h3>Your Comment</h3> : <></>}
             <div className="review_user">
               <AccountCircleIcon />
-              <h3>{item?.user}</h3>
+              <h3>{item?.user.length < 10 ? item?.user : "Mike"}</h3>
             </div>
             <div className="review_star">
-              {Array(item?.star)
+              {Array(5)
                 .fill(0)
                 .map((_, index) => {
-                  return <StarIcon />;
-                })}
-
-              {Array(5 - item?.star)
-                .fill(0)
-                .map((_, index) => {
-                  return <StarBorderIcon />;
+                  return index < item?.star ? (
+                    <StarIcon key={index} />
+                  ) : (
+                    <StarBorderIcon key={index} />
+                  );
                 })}
             </div>
             <p>{item?.review}</p>

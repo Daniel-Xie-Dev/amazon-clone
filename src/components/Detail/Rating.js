@@ -3,7 +3,7 @@ import "./Rating.css";
 import React, { useEffect, useRef, useState } from "react";
 
 function Rating({ rating }) {
-  const barWidth = useRef(null);
+  const barWidth = useRef();
   const [width, setWidth] = useState(0);
   const [barArray, setBarArray] = useState([]);
 
@@ -17,7 +17,7 @@ function Rating({ rating }) {
     for (let obj of rating) {
       accumulator += obj.star;
     }
-    return accumulator / rating?.length;
+    return (accumulator / rating?.length).toFixed(2);
   };
 
   const getPercentage = (star) => {
@@ -26,14 +26,12 @@ function Rating({ rating }) {
       if (obj.star === star) counter++;
     }
 
-    return counter / rating.length;
+    return (counter / rating.length).toFixed(2);
   };
 
   useEffect(() => {
-    if (width === 0) {
-      window.addEventListener("resize", getBarSize);
-      setWidth(barWidth.current.clientWidth);
-    }
+    window.addEventListener("resize", getBarSize);
+    setWidth(barWidth.current.clientWidth);
 
     let temp = [0, 0, 0, 0, 0];
     temp.map((_, index) => {
