@@ -75,9 +75,8 @@ function Home() {
           alt=""
           src="https://d24v5oonnj2ncn.cloudfront.net/wp-content/uploads/2018/10/16030301/Amazon-Logo-Black.jpg"
         />
-
-        {renderBrands(0)}
       </div>
+      {renderBrands(0)}
     </div>
   );
 }

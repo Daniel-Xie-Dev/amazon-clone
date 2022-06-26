@@ -5,6 +5,10 @@
   border: 1px solid black;
 }
 
+.brandCard:hover{
+  cursor: pointer;
+}
+
 .brandCard_image {
   width: 200px;
   object-fit: fill;
