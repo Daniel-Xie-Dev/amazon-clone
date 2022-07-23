@@ -7,6 +7,17 @@ export const initialState = {
 export const getBasketTotal = (basket) =>
   basket?.reduce((amount, item) => item.price * item.quantity + amount, 0);
 
+export const calculateRating = (ratings) => {
+  let averageRatings = 0;
+  for (let i = 0; i < ratings.length; i++) {
+    averageRatings += ratings[i].star;
+  }
+
+  return ratings.length !== 0
+    ? (averageRatings / ratings.length).toFixed(2)
+    : 0;
+};
+
 const reducer = (state, action) => {
   let index = state.basket.findIndex((item) => item.id === action.item.id);
   let newBasket = [...state.basket];

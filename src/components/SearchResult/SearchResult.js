@@ -38,7 +38,7 @@ function SearchResult() {
   return (
     <div className="search_result">
       {product?.length === 0 ? (
-        <h1>No result for {input}</h1>
+        <h1>Loading products...</h1>
       ) : (
         product.map((item, index) => {
           return (

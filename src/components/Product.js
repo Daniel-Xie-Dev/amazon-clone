@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./Product.css";
+import { calculateRating } from "../reducer";
 
 function Product({ id, type, brand, title, image, price, rating }) {
   const navigate = useNavigate();
-
   return (
     <div
       onClick={() => {
@@ -21,11 +21,12 @@ function Product({ id, type, brand, title, image, price, rating }) {
         </p>
 
         <div className="product_rating">
-          {Array(rating)
+          {calculateRating(rating)}
+          {/* {Array(rating)
             .fill()
             .map((_, i) => (
               <p key={i}>⭐</p>
-            ))}
+            ))} */}
         </div>
       </div>
     </div>
