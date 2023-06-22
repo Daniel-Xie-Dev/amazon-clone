@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+<br/>
+<p align="center">
+  <a href="https://github.com/Daniel-Xie-Dev/amazon-clone">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">E-Commerce Site (Amazon Clone)</h3>
 
-## Available Scripts
+  <p align="center">
+    A full-stack project that mimics Amazon's website. 
+    <br/>
+    <br/>
+    <a href="https://github.com/Daniel-Xie-Dev/amazon-clone"><strong>Explore the docs »</strong></a>
+    <br/>
+    <br/>
+  </p>
+</p>
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table Of Contents
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [License](#license)
+* [Authors](#authors)
+* [Acknowledgements](#acknowledgements)
 
-### `npm test`
+## About The Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Screen Shot](images/screenshot.png)
 
-### `npm run build`
+Amazon has been my go-to e-commerce site for as long as I can remember. It played a crucial role during my high school years and continued to be a reliable companion throughout my college journey. As a software engineer, I wanted to put my skills to the test and challenge myself by creating a project similar to Amazon.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project encompasses a range of features, including:
++ Sign in and sign up: A user-friendly system that allows you to easily create an account or log in to access all the features.
++ Secure authorization: Contains authorization checks to ensure that only authorized users can make transactions
++ Shopping cart convenience: A smooth and intuitive shopping cart experience that lets you view and manage your selected items effortlessly.
++ Add or remove with ease: Whether you're adding items to your cart or deciding to remove them, it's all just a few clicks away. 
++ Track your orders: Keep tabs on your previous orders with the convenience of order history.
++ Share your thoughts: Want to give feedback or share your experience with a product? A rating and commenting feature is included, so you can let others know what you think.
++ Find what you need: Looking for something specific? Simply use the search bar to find the products you're after quickly. It's designed to make your shopping experience efficient and enjoyable.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Built With
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
++ ReactJS
++ Google Firebase
++ Git
++ MaterialUI
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To get a local copy up and running follow these simple example steps.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* npm
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+npm install npm@latest -g
+```
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Create a firebase account and set up a new project. [Introduction to Firebase](https://www.youtube.com/watch?v=9kRgVxULbag)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Clone the repo
 
-### Code Splitting
+```sh
+git clone https://github.com/Daniel-Xie-Dev/amazon-clone.git
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. Install NPM packages
 
-### Analyzing the Bundle Size
+```sh
+npm install firebase
+npm install axios
+npm install @mui/material @emotion/react @emotion/styled
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Create a file called `firebase.js` and copy the firebase configuration.
 
-### Making a Progressive Web App
+```JS
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGE_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID",
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Usage
 
-### Advanced Configuration
+images/screenshot.png
+images/screenshot.png
+images/screenshot.png
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contributing
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+### Creating A Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See [LICENSE](https://github.com/Daniel-Xie-Dev/amazon-clone/blob/main/LICENSE.md) for more information.
+
+## Authors
+
+* ** Daniel Xie** - *Software Engineer* - [ Daniel Xie](https://github.com/Daniel-Xie-Dev) - *Design, built, and tested project.*
+
+## Acknowledgements
+
+* [Daniel Xie](https://github.com/Daniel-Xie-Dev)
+* []()
+* []()
