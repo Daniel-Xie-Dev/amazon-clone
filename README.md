@@ -99,8 +99,8 @@ const firebaseConfig = {
 
 ## Usage
 
-images/amazon-clone-signin-screenshot.PNG
-images/amazon-clone-item-screenshot.PNG
+![Screen Shot](images/amazon-clone-signin-screenshot.PNG)
+![Screen Shot](images/amazon-clone-item-screenshot.PNG)
 
 ## Contributing
 
