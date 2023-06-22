@@ -33,7 +33,7 @@
 
 ## About The Project
 
-![Screen Shot](images/amazon-clone-screenshot.png)
+![Screen Shot](images/amazon-clone-screenshot.PNG)
 
 Amazon has been my go-to e-commerce site for as long as I can remember. It played a crucial role during my high school years and continued to be a reliable companion throughout my college journey. As a software engineer, I wanted to put my skills to the test and challenge myself by creating a project similar to Amazon.
 
@@ -99,8 +99,8 @@ const firebaseConfig = {
 
 ## Usage
 
-images/amazon-clone-signin-screenshot.png
-images/amazon-clone-item-screenshot.png
+images/amazon-clone-signin-screenshot.PNG
+images/amazon-clone-item-screenshot.PNG
 
 ## Contributing
 
