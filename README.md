@@ -120,10 +120,8 @@ Distributed under the MIT License. See [LICENSE](https://github.com/Daniel-Xie-D
 
 ## Authors
 
-* ** Daniel Xie** - *Software Engineer* - [ Daniel Xie](https://github.com/Daniel-Xie-Dev) - *Design, built, and tested project.*
+* Daniel Xie - *Software Engineer* - [ Daniel Xie](https://github.com/Daniel-Xie-Dev) - *Design, built, and tested project.*
 
 ## Acknowledgements
 
 * [Daniel Xie](https://github.com/Daniel-Xie-Dev)
-* []()
-* []()
